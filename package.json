@@ -1,0 +1,48 @@
+{
+  "name": "react-redux-modal",
+  "version": "0.1.0",
+  "main": "dist/commonjs/index.js",
+  "jsnext:main": "dist/es/index.js",
+  "scripts": {
+    "start": "cross-env BABEL_ENV=commonjs hjs-dev-server webpack.config.dev.js",
+    "clean": "rimraf build",
+    "lint": "eslint src",
+    "build": "npm run build:commonjs && npm run build:umd && npm run build:es",
+    "build:es": "babel src --out-dir build/es",
+    "build:commonjs": "cross-env BABEL_ENV=commonjs babel src --out-dir build/commonjs",
+    "build:umd": "cross-env BABEL_ENV=commonjs webpack",
+    "prepublish": "npm run clean && npm run build"
+  },
+  "author": "Daniel Grant",
+  "license": "MIT",
+  "peerDependencies": {
+    "react": "^0.14.0 || ^15.0.0-0"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.6.5",
+    "babel-core": "^6.6.5",
+    "babel-eslint": "^5.0.0-beta4",
+    "babel-loader": "^6.2.4",
+    "babel-plugin-transform-es2015-modules-commonjs": "^6.8.0",
+    "babel-preset-es2015-no-commonjs": "0.0.2",
+    "babel-preset-react": "^6.5.0",
+    "babel-preset-react-hmre": "^1.1.1",
+    "cross-env": "^1.0.7",
+    "css-loader": "^0.23.1",
+    "eslint": "^1.10.2",
+    "eslint-config-airbnb": "1.0.2",
+    "eslint-plugin-react": "^4.1.0",
+    "hjs-webpack": "^8.1.0",
+    "postcss-loader": "^0.9.1",
+    "react": "^15.0.2",
+    "react-dom": "^15.0.2",
+    "rimraf": "^2.5.2",
+    "style-loader": "^0.13.1",
+    "webpack": "^1.12.15"
+  },
+  "dependencies": {
+    "react-redux": "^4.4.5",
+    "redux": "^3.5.2",
+    "redux-thunk": "^2.1.0"
+  }
+}
