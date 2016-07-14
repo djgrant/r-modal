@@ -1,0 +1,23 @@
+html,
+body {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+}
+
+.page {
+  padding: 20px;
+}
+
+.example {
+  margin-bottom: 20px;
+  padding: 20px;
+  border: 2px solid #eee;
+  boreder-radius: 3px;
+}
+
+.example details {
+  margin-top: 20px;
+}

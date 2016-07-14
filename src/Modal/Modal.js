@@ -1,64 +1,67 @@
 import React, { PropTypes } from 'react';
-import { connect } from 'react-redux';
-import { declareModal, closeModal } from './duck';
-import { selectors } from '../store';
-import './styles.css';
+
+const KEYCODES = {
+  ESC: 27
+};
 
 const Modal = React.createClass({
   propTypes: {
-    id: PropTypes.string,
-    ownProps: PropTypes.object,
+    children: PropTypes.node,
     open: PropTypes.bool,
-    declareModal: PropTypes.func,
-    closeModal: PropTypes.func
+    onRequestClose: PropTypes.func.isRequired,
+    onBeforeOpen: PropTypes.func.isRequired,
+    onBeforeClose: PropTypes.func.isRequired
   },
-  componentWillMount() {
-    this.props.declareModal(this.props.id);
+  componentDidMount() {
+    window.addEventListener('keydown', this.handleKeyDown);
+  },
+  componentWillReceiveProps(newProps) {
+    if (newProps.open && !this.props.open) {
+      this.props.onBeforeOpen();
+    }
+    else if (!newProps.open && this.props.open) {
+      this.props.onBeforeClose();
+    }
   },
   getStyles() {
-    if (this.props.open) {
-      return {
-        overlay: {
-          position: 'fixed',
-          top: 0,
-          left: 0,
-          right: 0,
-          bottom: 0,
-          background: 'rgba(0, 0, 0, 0.5)'
-        }
-      };
-    }
-    return { overlay: null };
+    return {
+      overlay: !this.props.open ? null : {
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0,
+        background: 'rgba(0, 0, 0, 0.5)'
+      }
+    };
+  },
+  getOverlayRef(node) {
+    this._overlay = node;
   },
   handleOverlayClick(e) {
-    if (e.target.className.indexOf('close-modal') !== -1) {
-      this.props.closeModal();
+    if (e.target === this._overlay) {
+      this.props.onRequestClose();
+    }
+  },
+  handleKeyDown: function(e) {
+    if (e.keyCode === KEYCODES.ESC) {
+      e.preventDefault();
+      this.props.onRequestClose();
     }
   },
   render() {
     return (
       <div
-        className="overlay close-modal"
+        ref={this.getOverlayRef}
+        className="overlay"
         style={this.getStyles().overlay}
         onClick={this.handleOverlayClick}>
         {this.props.open && (
-          <div
-            {...this.props.ownProps}
-            className="modal"
-          />
+          <div className="modal">{this.props.children}</div>
         )}
       </div>
     );
   }
 });
 
-export default connect(
-  (state, ownProps) => ({
-    ownProps,
-    open: selectors.isOpen(state, ownProps.id)
-  }),
-  dispatch => ({
-    declareModal: id => dispatch(declareModal(id)),
-    closeModal: () => dispatch(closeModal())
-  })
-)(Modal);
+export default Modal;

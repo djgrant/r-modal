@@ -15,8 +15,7 @@ config.resolve.modulesDirectories = ['src', 'node_modules'];
 
 if (NODE_ENV === 'production') {
   config.output.libraryTarget = 'umd';
-  config.output.library = 'boilerplate'; // insert library name
-
+  config.output.library = 'react-redux-modal';
   config.externals = [{
     react: {
       root: 'React',

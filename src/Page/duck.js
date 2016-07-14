@@ -1,31 +1,22 @@
-export const lockPage = () => ({ type: 'LOCK_PAGE', scrollY });
-export const unlockPage = () => ({ type: 'UNLOCK_PAGE', scrollY });
+export const lockPage = () => ({ type: 'LOCK_PAGE' });
+export const unlockPage = () => ({ type: 'UNLOCK_PAGE' });
 
 export const initialState = {
-  locked: false,
-  scrollY: 0
+  locked: false
 };
 
-export default function(state = initialState, action) {
+export const reducer = (state = initialState, action) => {
   if (action.type === 'LOCK_PAGE') {
-    return Object.assign({}, state, {
-      locked: true,
-      scrollY: action.scrollY
-    });
+    return { locked: true };
   }
   if (action.type === 'UNLOCK_PAGE') {
-    return Object.assign({}, state, {
-      locked: false
-    });
+    return { locked: false };
   }
   return state;
-}
+};
 
 export const selectors = {
-  getLocked: function(state) {
+  isLocked: function(state) {
     return state.locked;
-  },
-  getScrollY: function(state) {
-    return state.scrollY;
   }
 };

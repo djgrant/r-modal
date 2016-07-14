@@ -1,23 +1,28 @@
 import React, { PropTypes } from 'react';
-import { connect } from 'react-redux';
-import { selectors } from '../store';
 
 const Page = React.createClass({
   propTypes: {
     ownProps: PropTypes.object,
-    locked: PropTypes.bool,
-    scrollY: PropTypes.number
+    locked: PropTypes.bool
+  },
+  componentWillMount() {
+    this.lastScrollY = 0;
+  },
+  componentWillReceiveProps(newProps) {
+    if (newProps.locked && !this.props.locked) {
+      this.lastScrollY = window.scrollY;
+    }
   },
   componentDidUpdate(prevProps) {
     if (!this.props.locked && prevProps.locked) {
-      window.scroll(0, this.props.scrollY);
+      window.scroll(0, this.lastScrollY);
     }
   },
   getStyles() {
     if (this.props.locked) {
       return {
         position: 'fixed',
-        top: `${-this.props.scrollY}px`,
+        top: `${-window.scrollY}px`,
         left: 0,
         right: 0
       };
@@ -34,10 +39,4 @@ const Page = React.createClass({
   }
 });
 
-export default connect(
-  (state, ownProps) => ({
-    locked: selectors.getLocked(state),
-    scrollY: selectors.getScrollY(state),
-    ownProps
-  })
-)(Page);
+export default Page;

@@ -1,2 +1,2 @@
 export { default } from './Page';
-export { reducer } from './duck';
+export * from './duck';
