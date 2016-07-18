@@ -13,6 +13,9 @@ import { openModal, closeModal } from 'Modal';
 import ReduxStateModal from '../ReduxStateModal';
 import ReduxStateModalCode from '!!raw!../ReduxStateModal/ReduxStateModal';
 
+import RouterStateModal from '../RouterStateModal';
+// import RouterStateModalCode from '!!raw!../RouterStateModal/RouterStateModal';
+
 const App = React.createClass({
   propTypes: {
     closeReduxModal: PropTypes.func.isRequired,
@@ -58,6 +61,12 @@ const App = React.createClass({
           title="Open all child routes in a modal (à la trello)"
           code="">
           <Link to={{ pathname: 'boards/1/cards/2'}}>Go to route (always opens in a modal)</Link>
+        </Example>
+        <Example
+          title="Open modal with query params"
+          code="">
+          <Link to={{ query: { modal: true }, state: { modal: true }}}>Open Modal</Link>
+          <RouterStateModal>It worked</RouterStateModal>
         </Example>
       </MyPage>
     );

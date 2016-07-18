@@ -13,9 +13,9 @@ export const RouterStateModal = React.createClass({
   render() {
     return (
       <Modal
-        open={this.props.location.state.modal && this.props.location.query.modal || false}
+        open={this.props.location.state && this.props.location.state.modal && this.props.location.query.modal || false}
         onRequestClose={this.closeModal}>
-        This is a Modal
+        {this.props.children}
         <button onClick={this.closeModal}>Close Modal</button>
       </Modal>
     );
