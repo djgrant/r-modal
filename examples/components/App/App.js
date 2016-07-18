@@ -13,6 +13,9 @@ import { openModal, closeModal } from 'Modal';
 import ReduxStateModal from '../ReduxStateModal';
 import ReduxStateModalCode from '!!raw!../ReduxStateModal/ReduxStateModal';
 
+import RouterStateModal from '../RouterStateModal';
+import RouterStateModalCode from '!!raw!../RouterStateModal/RouterStateModal';
+
 const App = React.createClass({
   propTypes: {
     closeReduxModal: PropTypes.func.isRequired,
@@ -47,6 +50,12 @@ const App = React.createClass({
               Hello again
               <button onClick={this.props.closeReduxModal}>Close</button>
             </ReduxStateModal>
+          </Example>
+          <Example
+            title="Using URL state"
+            code={RouterStateModalCode}>
+            <Link to={{ query: { modal: true }}}>Open Modal</Link>
+            <RouterStateModal />
           </Example>
         </MyPage>
       </div>
