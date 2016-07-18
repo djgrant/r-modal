@@ -1,4 +1,4 @@
-import React, { PropTypes } from 'React';
+import React, { PropTypes } from 'react';
 
 const Example = React.createClass({
   propTypes: {
@@ -8,14 +8,14 @@ const Example = React.createClass({
   },
   render() {
     return (
-      <div className="example">
+      <section>
         <h3>{this.props.title}</h3>
         {this.props.children}
         <details>
           <summary>Code</summary>
           <pre>{this.props.code}</pre>
         </details>
-      </div>
+      </section>
     );
   }
 });

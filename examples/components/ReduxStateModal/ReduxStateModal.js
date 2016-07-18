@@ -1,34 +1,36 @@
 import React, { PropTypes } from 'react';
+import { connect } from 'react-redux';
 import Modal from '../MyModal';
+import { closeModal, declareModal, selectors } from 'Modal';
 
-export const ReactStateModal = React.createClass({
+export const ReduxStateModal = React.createClass({
   propTypes: {
-    lockPage: PropTypes.func,
-    unlockPage: PropTypes.func
+    ownProps: PropTypes.object.isRequired,
+    open: PropTypes.bool.isRequired,
+    closeModal: PropTypes.func.isRequired,
+    declareModal: PropTypes.func.isRequired
   },
-  getInitialState: () => ({
-    open: false
-  }),
-  openModal() {
-    this.setState({
-      open: true
-    });
-  },
-  closeModal() {
-    this.setState({
-      open: false
-    });
+  componentWillMount() {
+    this.props.declareModal();
   },
   render() {
     return (
       <Modal
-        open={this.state.open}
-        onRequestClose={this.closeModal}>
-        This is a Modal
-        <button onClick={this.closeModal}>Close Modal</button>
-      </Modal>
+        {...this.props.ownProps}
+        open={this.props.open}
+        onRequestClose={this.props.closeModal}
+      />
     );
   }
 });
 
-export default ReactStateModal;
+export default connect(
+  (state, ownProps) => ({
+    ownProps,
+    open: selectors.isOpen(state.modals, ownProps.id)
+  }),
+  (dispatch, ownProps) => ({
+    closeModal: () => dispatch(closeModal()),
+    declareModal: () => dispatch(declareModal(ownProps.id))
+  })
+)(ReduxStateModal);
