@@ -31,7 +31,7 @@ const BoardWithRoutesInModal = props => (
     {...props}
     modal={MyModal}
     component={Index}
-    always
+    returnTo={`/boards/${props.params.id[0]}`}
   />
 );
 

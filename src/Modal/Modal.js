@@ -18,9 +18,6 @@ const Modal = React.createClass({
       this.props.onBeforeOpen();
     }
   },
-  componentWillUnmount() {
-    this.props.onBeforeClose();
-  },
   componentWillReceiveProps(newProps) {
     if (newProps.open && !this.props.open) {
       this.props.onBeforeOpen();
@@ -28,6 +25,10 @@ const Modal = React.createClass({
     else if (!newProps.open && this.props.open) {
       this.props.onBeforeClose();
     }
+  },
+  componentWillUnmount() {
+    window.removeEventListener('keydown', this.handleKeyDown);
+    this.props.onBeforeClose();
   },
   getStyles() {
     return {
@@ -50,7 +51,7 @@ const Modal = React.createClass({
     }
   },
   handleKeyDown: function(e) {
-    if (e.keyCode === KEYCODES.ESC) {
+    if (this.props.open && e.keyCode === KEYCODES.ESC) {
       e.preventDefault();
       this.props.onRequestClose();
     }

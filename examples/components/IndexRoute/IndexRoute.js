@@ -52,14 +52,14 @@ const App = React.createClass({
         <Example
           title="Open routes in a modal with react-router state (à la pinterest)"
           code="">
-          <Link to={{ pathname: 'pictures/1', state: { modal: true }}}>Open route in modal (using react-router state)</Link>
+          <Link to={{ pathname: '/pictures/1', state: { modal: true }}}>Open route in modal (using react-router state)</Link>
           <br />
-          <Link to={{ pathname: 'pictures/1' }}>Go to route normally</Link>
+          <Link to={{ pathname: '/pictures/1' }}>Go to route normally</Link>
         </Example>
         <Example
           title="Open all child routes in a modal (à la trello)"
           code="">
-          <Link to={{ pathname: 'boards/1/cards/2'}}>Go to route (always opens in a modal)</Link>
+          <Link to={{ pathname: '/boards/1/cards/2'}}>Go to route (always opens in a modal)</Link>
         </Example>
         <Example
           title="Open modal with query params"
