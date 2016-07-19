@@ -1,12 +1,13 @@
 import React, { PropTypes } from 'react';
 import { withRouter } from 'react-router';
 import DefaultModal from './Modal';
-import Page from '../Page';
+import DefaultPage from '../Page';
 
 export const WithRoutesInModal = withRouter(React.createClass({
   propTypes: {
     component: PropTypes.func,
     modal: PropTypes.func,
+    page: PropTypes.func,
     location: PropTypes.object.isRequired,
     children: PropTypes.node,
     router: PropTypes.object,
@@ -21,6 +22,7 @@ export const WithRoutesInModal = withRouter(React.createClass({
   }),
   componentWillMount() {
     this.Modal = this.props.modal || DefaultModal;
+    this.Page = this.props.page || DefaultPage;
   },
   componentWillReceiveProps(nextProps) {
     if (
@@ -63,9 +65,9 @@ export const WithRoutesInModal = withRouter(React.createClass({
       const showModal = this.props.routes.length > 1;
       return (
         <div>
-          <Page locked={this.state.pageLocked}>
+          <this.Page locked={this.state.pageLocked}>
             <this.props.component />
-          </Page>
+          </this.Page>
           {modal(showModal)}
         </div>
       );
@@ -79,14 +81,14 @@ export const WithRoutesInModal = withRouter(React.createClass({
 
     return (
       <div>
-        <Page locked={this.state.pageLocked}>
+        <this.Page locked={this.state.pageLocked}>
           <this.props.component>
             {showModal ?
               this.previousChildren :
               this.props.children
             }
           </this.props.component>
-        </Page>
+        </this.Page>
         {modal(showModal)}
       </div>
     );

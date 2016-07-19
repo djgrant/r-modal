@@ -5,6 +5,7 @@ import { Router, Route, IndexRoute, browserHistory } from 'react-router';
 import store from './store';
 import Index from './components/IndexRoute';
 import { WithRoutesInModal } from 'Modal';
+import MyPage from './components/MyPage';
 
 const App = ({ children }) => (
   <div>{children}</div>
@@ -15,7 +16,7 @@ const ModalContent = props => (<div>This is a modal with id: {props.params.id}</
 let i = 100;
 const elements = [];
 while (i > 0) {
-  elements.push(<div key={i}>dummy content</div>)
+  elements.push(<div key={i}>dummy content</div>);
   i--;
 }
 
@@ -27,6 +28,7 @@ const DefaultWithRoutesInModal = props => (
   <WithRoutesInModal
     {...props}
     component={App}
+    page={MyPage}
   />
 );
 
@@ -34,6 +36,7 @@ const BoardWithRoutesInModal = props => (
   <WithRoutesInModal
     {...props}
     component={Board}
+    page={MyPage}
     returnTo={`/boards/${props.params.id[0]}`}
   />
 );
