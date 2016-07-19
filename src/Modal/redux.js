@@ -1,5 +1,5 @@
 export const declareModal = id => ({
-  type: 'DECLARE_MODAL',
+  type: 'REGISTER_MODAL',
   id
 });
 
@@ -31,7 +31,7 @@ export const modal = (state = initialModalState, action) => {
 };
 
 export const reducer = (state = {}, action) => {
-  if (action.type === 'DECLARE_MODAL') {
+  if (action.type === 'REGISTER_MODAL') {
     return Object.assign({}, state, {
       [action.id]: modal(undefined, action)
     });
