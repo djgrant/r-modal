@@ -6,8 +6,11 @@ import store from './store';
 import Index from './components/IndexRoute';
 import { WithRoutesInModal } from 'Modal';
 import MyModal from './components/MyModal';
+import MyPage from './components/MyPage';
 
-const App = props => (<div>{props.children}</div>);
+const App = ({ children }) => (
+  <div>{children}</div>
+);
 
 const ModalContent = props => (<div>This is a modal with id: {props.params.id}</div>);
 
@@ -34,15 +37,17 @@ const BoardWithRoutesInModal = props => (
 
 render(
   <Provider store={store}>
-    <Router history={browserHistory}>
-      <Route path="/" component={DefaultWithRoutesInModal}>
-        <IndexRoute component={Index} />
-        <Route path="pictures/:id" component={ModalContent} />
-      </Route>
-      <Route path="/boards/:id" component={BoardWithRoutesInModal}>
-        <Route path="cards/:id" component={ModalContent} />
-      </Route>
-    </Router>
+    <MyPage>
+      <Router history={browserHistory}>
+        <Route path="/" component={DefaultWithRoutesInModal}>
+          <IndexRoute component={Index} />
+          <Route path="pictures/:id" component={ModalContent} />
+        </Route>
+        <Route path="/boards/:id" component={BoardWithRoutesInModal}>
+          <Route path="cards/:id" component={ModalContent} />
+        </Route>
+      </Router>
+    </MyPage>
   </Provider>,
   document.getElementById('root')
 );

@@ -14,6 +14,12 @@ const Modal = React.createClass({
   },
   componentDidMount() {
     window.addEventListener('keydown', this.handleKeyDown);
+    if (this.props.open) {
+      this.props.onBeforeOpen();
+    }
+  },
+  componentWillUnmount() {
+    this.props.onBeforeClose();
   },
   componentWillReceiveProps(newProps) {
     if (newProps.open && !this.props.open) {

@@ -22,35 +22,33 @@ export const WithRoutesInModal = React.createClass({
     }
   },
   render() {
-    const modal = (
-      <this.Modal open onRequestClose={() => window.history.back()}>
-        {this.props.children}
-      </this.Modal>
-    );
-
     if (this.props.always) {
       return (
         <div>
           <this.props.component />
-          {modal}
+          <this.Modal open onRequestClose={() => window.history.back()}>
+            {this.props.children}
+          </this.Modal>
         </div>
       );
     }
 
-    const displayAsModal = (
+    const showModal = (
       this.props.location.state &&
       this.props.location.state.modal &&
       this.previousChildren
     );
 
     return (
-      <div>
-        {displayAsModal ?
+      <this.props.component>
+        {showModal ?
           this.previousChildren :
           this.props.children
         }
-        {displayAsModal && modal}
-      </div>
+        <this.Modal open={showModal} onRequestClose={() => window.history.back()}>
+          {this.props.children}
+        </this.Modal>
+      </this.props.component>
     );
   }
 });

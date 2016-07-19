@@ -1,7 +1,6 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
-import MyPage from '../MyPage';
 import Example from './Example';
 import readme from '../../../README.md';
 import './styles.css';
@@ -24,7 +23,7 @@ const App = React.createClass({
   },
   render() {
     return (
-      <MyPage>
+      <div>
         <div dangerouslySetInnerHTML={{ __html: readme }} />
         <h2>Examples</h2>
         <Example
@@ -68,7 +67,7 @@ const App = React.createClass({
           <Link to={{ query: { modal: true }, state: { modal: true }}}>Open Modal</Link>
           <RouterStateModal>It worked</RouterStateModal>
         </Example>
-      </MyPage>
+      </div>
     );
   }
 });
