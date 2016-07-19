@@ -22,7 +22,7 @@ const Page = React.createClass({
     if (this.props.locked) {
       return {
         position: 'fixed',
-        top: `${-window.scrollY}px`,
+        top: `${-this.lastScrollY}px`,
         left: 0,
         right: 0
       };

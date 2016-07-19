@@ -20,7 +20,7 @@ export const WithRoutesInModal = withRouter(React.createClass({
   },
   componentWillReceiveProps(nextProps) {
     if (
-      // modal reequested
+      // modal requested
       nextProps.location.state &&
       nextProps.location.state.modal &&
       // route changed
@@ -52,24 +52,26 @@ export const WithRoutesInModal = withRouter(React.createClass({
         </div>
       );
     }
-    const showModal = (
+    const showModal = !!(
       this.props.location.state &&
       this.props.location.state.modal &&
-      !!this.previousChildren
+      this.previousChildren
     );
 
     return (
-      <this.props.component>
-        {showModal ?
-          this.previousChildren :
-          this.props.children
-        }
+      <div>
+        <this.props.component>
+          {showModal ?
+            this.previousChildren :
+            this.props.children
+          }
+        </this.props.component>
         <this.Modal
           open={showModal}
           onRequestClose={this.closeModal}>
           {this.props.children}
         </this.Modal>
-      </this.props.component>
+      </div>
     );
   }
 }));
