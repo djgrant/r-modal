@@ -7,6 +7,7 @@
     "commonjs": {
       "plugins": [
         ["transform-es2015-modules-commonjs", { "loose": true }],
+        "transform-object-rest-spread"
       ]
     }
   }

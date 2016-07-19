@@ -2,7 +2,6 @@ import React, { PropTypes } from 'react';
 
 const Page = React.createClass({
   propTypes: {
-    ownProps: PropTypes.object,
     locked: PropTypes.bool
   },
   componentWillMount() {
@@ -18,22 +17,21 @@ const Page = React.createClass({
       window.scroll(0, this.lastScrollY);
     }
   },
-  getStyles() {
-    if (this.props.locked) {
-      return {
-        position: 'fixed',
-        top: `${-this.lastScrollY}px`,
-        left: 0,
-        right: 0
-      };
-    }
+  getLockedStyles() {
+    return {
+      position: 'fixed',
+      top: `${-this.lastScrollY}px`,
+      left: 0,
+      right: 0
+    };
   },
   render() {
+    const { locked, ...ownProps } = this.props;
     return (
       <div
-        {...this.props.ownProps}
+        {...ownProps}
         className="page"
-        style={this.getStyles()}
+        style={locked ? this.getLockedStyles() : {}}
       />
     );
   }

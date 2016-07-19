@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react';
 import { withRouter } from 'react-router';
 import DefaultModal from './Modal';
+import Page from '../Page';
 
 export const WithRoutesInModal = withRouter(React.createClass({
   propTypes: {
@@ -15,6 +16,9 @@ export const WithRoutesInModal = withRouter(React.createClass({
       PropTypes.object
     ])
   },
+  getInitialState: () => ({
+    pageLocked: false
+  }),
   componentWillMount() {
     this.Modal = this.props.modal || DefaultModal;
   },
@@ -38,20 +42,35 @@ export const WithRoutesInModal = withRouter(React.createClass({
     const returnTo = this.props.returnTo || this.previousLocation.pathname;
     this.props.router.push(returnTo);
   },
+  lockPage() {
+    this.setState({ pageLocked: true });
+  },
+  unlockPage() {
+    this.setState({ pageLocked: false });
+  },
   render() {
+    const modal = (open) => (
+      <this.Modal
+        open={open}
+        onRequestClose={this.closeModal}
+        onBeforeOpen={this.lockPage}
+        onBeforeClose={this.unlockPage}>
+        {this.props.children}
+      </this.Modal>
+    );
+
     if (this.props.returnTo) {
       const showModal = this.props.routes.length > 1;
       return (
         <div>
-          <this.props.component />
-          <this.Modal
-            open={showModal}
-            onRequestClose={this.closeModal}>
-            {this.props.children}
-          </this.Modal>
+          <Page locked={this.state.pageLocked}>
+            <this.props.component />
+          </Page>
+          {modal(showModal)}
         </div>
       );
     }
+
     const showModal = !!(
       this.props.location.state &&
       this.props.location.state.modal &&
@@ -60,17 +79,15 @@ export const WithRoutesInModal = withRouter(React.createClass({
 
     return (
       <div>
-        <this.props.component>
-          {showModal ?
-            this.previousChildren :
-            this.props.children
-          }
-        </this.props.component>
-        <this.Modal
-          open={showModal}
-          onRequestClose={this.closeModal}>
-          {this.props.children}
-        </this.Modal>
+        <Page locked={this.state.pageLocked}>
+          <this.props.component>
+            {showModal ?
+              this.previousChildren :
+              this.props.children
+            }
+          </this.props.component>
+        </Page>
+        {modal(showModal)}
       </div>
     );
   }
