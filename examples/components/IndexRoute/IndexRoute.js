@@ -53,6 +53,7 @@ const App = React.createClass({
           title="Open routes in a modal with react-router state (à la pinterest)"
           code="">
           <Link to={{ pathname: '/pictures/1', state: { modal: true }}}>Open route in modal (using react-router state)</Link>
+
           <br />
           <Link to={{ pathname: '/pictures/1' }}>Go to route normally</Link>
         </Example>
@@ -64,7 +65,7 @@ const App = React.createClass({
         <Example
           title="Open modal with query params"
           code="">
-          <Link to={{ query: { modal: true }, state: { modal: true }}}>Open Modal</Link>
+          <Link to={{ query: { modal: true } }}>Open Modal</Link>
           <RouterStateModal>It worked</RouterStateModal>
         </Example>
       </div>

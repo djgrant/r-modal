@@ -43,7 +43,7 @@ render(
           <IndexRoute component={Index} />
           <Route path="pictures/:id" component={ModalContent} />
         </Route>
-        <Route path="/boards/:id" component={BoardWithRoutesInModal}>
+        <Route path="boards/:id" component={BoardWithRoutesInModal}>
           <Route path="cards/:id" component={ModalContent} />
         </Route>
       </Router>

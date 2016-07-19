@@ -10,16 +10,23 @@ export const WithRoutesInModal = withRouter(React.createClass({
     children: PropTypes.node,
     router: PropTypes.object,
     routes: PropTypes.array,
-    returnTo: PropTypes.any
+    returnTo: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.object
+    ])
   },
   componentWillMount() {
     this.Modal = this.props.modal || DefaultModal;
   },
   componentWillReceiveProps(nextProps) {
     if (
-      nextProps.location.key !== this.props.location.key &&
+      // modal reequested
       nextProps.location.state &&
-      nextProps.location.state.modal
+      nextProps.location.state.modal &&
+      // route changed
+      nextProps.location.pathname !== this.props.location.pathname &&
+      // wasn't just a re-render
+      nextProps.location.key !== this.props.location.key
     ) {
       this.previousChildren = this.props.children;
     }
@@ -45,11 +52,10 @@ export const WithRoutesInModal = withRouter(React.createClass({
         </div>
       );
     }
-
     const showModal = (
       this.props.location.state &&
       this.props.location.state.modal &&
-      this.previousChildren
+      !!this.previousChildren
     );
 
     return (
