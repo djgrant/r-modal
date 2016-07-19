@@ -1,4 +1,4 @@
-export const declareModal = id => ({
+export const registerModal = id => ({
   type: 'REGISTER_MODAL',
   id
 });

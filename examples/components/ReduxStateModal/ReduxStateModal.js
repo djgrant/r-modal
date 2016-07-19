@@ -1,17 +1,17 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import Modal from '../MyModal';
-import { closeModal, declareModal, selectors } from 'Modal';
+import { closeModal, registerModal, selectors } from 'Modal';
 
 export const ReduxStateModal = React.createClass({
   propTypes: {
     ownProps: PropTypes.object.isRequired,
     open: PropTypes.bool.isRequired,
     closeModal: PropTypes.func.isRequired,
-    declareModal: PropTypes.func.isRequired
+    registerModal: PropTypes.func.isRequired
   },
   componentWillMount() {
-    this.props.declareModal();
+    this.props.registerModal();
   },
   render() {
     return (
@@ -31,6 +31,6 @@ export default connect(
   }),
   (dispatch, ownProps) => ({
     closeModal: () => dispatch(closeModal()),
-    declareModal: () => dispatch(declareModal(ownProps.id))
+    registerModal: () => dispatch(registerModal(ownProps.id))
   })
 )(ReduxStateModal);
