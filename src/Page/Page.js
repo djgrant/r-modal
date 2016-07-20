@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 
-const Page = React.createClass({
+export const Page = React.createClass({
   propTypes: {
     locked: PropTypes.bool
   },
@@ -36,5 +36,3 @@ const Page = React.createClass({
     );
   }
 });
-
-export default Page;

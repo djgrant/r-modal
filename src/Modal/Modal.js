@@ -4,7 +4,7 @@ const KEYCODES = {
   ESC: 27
 };
 
-const Modal = React.createClass({
+export const Modal = React.createClass({
   propTypes: {
     children: PropTypes.node,
     open: PropTypes.bool,
@@ -70,5 +70,3 @@ const Modal = React.createClass({
     );
   }
 });
-
-export default Modal;

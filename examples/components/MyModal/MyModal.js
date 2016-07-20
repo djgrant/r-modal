@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import Modal from 'Modal';
+import { Modal } from 'Modal';
 import { lockPage, unlockPage } from 'Page';
 import './styles.css';
 
