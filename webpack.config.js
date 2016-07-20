@@ -3,7 +3,7 @@ const getConfig = require('hjs-webpack');
 
 const config = getConfig({
   in: 'src/index.js',
-  out: 'build/umd',
+  out: 'umd',
   html: false,
   clearBeforeBuild: true,
   devServer: {

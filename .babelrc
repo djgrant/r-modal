@@ -1,5 +1,5 @@
 {
-  "presets": ["es2015-no-commonjs", "react"],
+  "presets": ["es2015", "react"],
   "plugins": [
     "transform-object-rest-spread"
   ],
@@ -9,8 +9,11 @@
     },
     "commonjs": {
       "plugins": [
-        ["transform-es2015-modules-commonjs", { "loose": true }]
+        ["transform-es2015-modules-commonjs"]
       ]
+    },
+    "es": {
+      "presets": ["es2015-native-modules"]
     }
   }
 }

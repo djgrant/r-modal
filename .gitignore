@@ -1,5 +1,7 @@
 node_modules
-build
+lib
+es
+umd
 logs
 *.log
 npm-debug.log*
