@@ -30,7 +30,7 @@ export const modal = (state = initialModalState, action) => {
   return state;
 };
 
-export const reducer = (state = {}, action) => {
+export const modalsReducer = (state = {}, action) => {
   if (action.type === 'REGISTER_MODAL') {
     return Object.assign({}, state, {
       [action.id]: modal(undefined, action)
@@ -50,7 +50,7 @@ export const reducer = (state = {}, action) => {
   );
 };
 
-export const selectors = {
+export const modalsSelectors = {
   isOpen: (state, id) => {
     return !!state[id] && state[id].open;
   }

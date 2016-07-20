@@ -5,7 +5,8 @@ import Modal from '../MyModal';
 export const RouterStateModal = React.createClass({
   propTypes: {
     router: PropTypes.object,
-    location: PropTypes.object
+    location: PropTypes.object,
+    children: PropTypes.node
   },
   closeModal() {
     window.history.back();
@@ -13,7 +14,7 @@ export const RouterStateModal = React.createClass({
   render() {
     return (
       <Modal
-        open={!!this.props.location.query.modal || false}
+        open={this.props.router.isActive({ query: { modal: true }})}
         onRequestClose={this.closeModal}>
         {this.props.children}
         <button onClick={this.closeModal}>Close Modal</button>

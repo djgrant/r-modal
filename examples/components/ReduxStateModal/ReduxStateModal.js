@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import Modal from '../MyModal';
-import { closeModal, registerModal, selectors } from 'Modal';
+import { closeModal, registerModal, modalsSelectors } from 'Modal';
 
 export const ReduxStateModal = React.createClass({
   propTypes: {
@@ -27,7 +27,7 @@ export const ReduxStateModal = React.createClass({
 export default connect(
   (state, ownProps) => ({
     ownProps,
-    open: selectors.isOpen(state.modals, ownProps.id)
+    open: modalsSelectors.isOpen(state.modals, ownProps.id)
   }),
   (dispatch, ownProps) => ({
     closeModal: () => dispatch(closeModal()),

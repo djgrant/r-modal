@@ -1,2 +1,2 @@
 export { default } from './Page';
-export * from './redux';
+export * from './duck';

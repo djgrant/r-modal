@@ -5,7 +5,7 @@ export const initialState = {
   locked: false
 };
 
-export const reducer = (state = initialState, action) => {
+export const pageReducer = (state = initialState, action) => {
   if (action.type === 'LOCK_PAGE') {
     return { locked: true };
   }
@@ -15,7 +15,7 @@ export const reducer = (state = initialState, action) => {
   return state;
 };
 
-export const selectors = {
+export const pageSelectors = {
   isLocked: function(state) {
     return state.locked;
   }

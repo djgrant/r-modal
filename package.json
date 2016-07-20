@@ -1,8 +1,8 @@
 {
-  "name": "react-redux-modal",
+  "name": "r-modal",
   "version": "0.1.0",
-  "main": "dist/commonjs/index.js",
-  "jsnext:main": "dist/es/index.js",
+  "main": "build/commonjs/index.js",
+  "jsnext:main": "build/es/index.js",
   "scripts": {
     "start": "cross-env BABEL_ENV=commonjs hjs-dev-server webpack.config.dev.js",
     "clean": "rimraf build",
@@ -13,6 +13,18 @@
     "build:umd": "cross-env BABEL_ENV=commonjs webpack",
     "prepublish": "npm run clean && npm run build"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/djgrant/r-modal"
+  },
+  "homepage": "https://github.com/djgrant/r-modal",
+  "keywords": [
+    "modal",
+    "react",
+    "react-router",
+    "redux",
+    "integration"
+  ],
   "author": "Daniel Grant",
   "license": "MIT",
   "peerDependencies": {
@@ -40,14 +52,12 @@
     "raw-loader": "^0.5.1",
     "react": "^15.0.2",
     "react-dom": "^15.0.2",
+    "react-redux": "^4.4.5",
+    "react-router": "^2.6.0",
+    "redux": "^3.5.2",
+    "redux-thunk": "^2.1.0",
     "rimraf": "^2.5.2",
     "style-loader": "^0.13.1",
     "webpack": "^1.12.15"
-  },
-  "dependencies": {
-    "react-redux": "^4.4.5",
-    "react-router": "^3.0.0-alpha.1",
-    "redux": "^3.5.2",
-    "redux-thunk": "^2.1.0"
   }
 }
