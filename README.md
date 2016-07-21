@@ -39,8 +39,11 @@ prop|type|description
 :---|:---|:---
 open | bool.isRequired | display the modal and overlay
 onRequestClose | func.isRequired | an escape hatch for the modal to access the outer state. Is called when the overlay is clicked or the ESC key is pressed.
-onBeforeOpen | func.isRequired | called before the modal opens
-onBeforeClose | func.isRequired | called before the modal closes
+onBeforeOpen | func | called before the modal opens
+onBeforeClose | func | called before the modal closes
+className | string | classes to be applied to the modal element
+overlayClassName | string | classes to be applied to the overlay element
+style | shape({ overlay, modal }) | an object with inline styles to be applied to overlay and modal elements
 
 ### `<Page>`
 

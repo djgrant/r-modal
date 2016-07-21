@@ -7,11 +7,23 @@ const KEYCODES = {
 export const Modal = React.createClass({
   propTypes: {
     children: PropTypes.node,
+    className: PropTypes.string,
+    overlayClassName: PropTypes.string,
+    style: PropTypes.shape({
+      modal: PropTypes.Object,
+      overlay: PropTypes.Object
+    }),
     open: PropTypes.bool,
     onRequestClose: PropTypes.func.isRequired,
     onBeforeOpen: PropTypes.func,
     onBeforeClose: PropTypes.func
   },
+  getDefaultProps: () => ({
+    style: {
+      overlay: {},
+      modal: {}
+    }
+  }),
   componentDidMount() {
     window.addEventListener('keydown', this.handleKeyDown);
     if (this.props.open) {
@@ -40,18 +52,6 @@ export const Modal = React.createClass({
       this.props.onBeforeClose();
     }
   },
-  getStyles() {
-    return {
-      overlay: !this.props.open ? null : {
-        position: 'fixed',
-        top: 0,
-        left: 0,
-        right: 0,
-        bottom: 0,
-        background: 'rgba(0, 0, 0, 0.5)'
-      }
-    };
-  },
   getOverlayRef(node) {
     this._overlay = node;
   },
@@ -68,13 +68,19 @@ export const Modal = React.createClass({
   },
   render() {
     return (
-      <div
-        ref={this.getOverlayRef}
-        className="overlay"
-        style={this.getStyles().overlay}
-        onClick={this.handleOverlayClick}>
+      <div>
         {this.props.open && (
-          <div className="modal">{this.props.children}</div>
+          <div
+            ref={this.getOverlayRef}
+            className={this.props.overlayClassName}
+            style={this.props.style.overlay}
+            onClick={this.handleOverlayClick}>
+            <div
+              className={this.props.className}
+              style={this.props.style.modal}>
+              {this.props.children}
+            </div>
+          </div>
         )}
       </div>
     );
