@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import Modal from '../MyModal';
-import { closeModal, registerModal, modalsSelectors } from 'Modal';
+import { closeModal, registerModal, modalsSelectors } from 'r-modal/lib/redux';
 
 export const ReduxStateModal = React.createClass({
   propTypes: {

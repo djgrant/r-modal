@@ -4,8 +4,9 @@ import { Provider } from 'react-redux';
 import { Router, Route, IndexRoute, browserHistory } from 'react-router';
 import store from './store';
 import Index from './components/IndexRoute';
-import { WithRoutesInModal } from 'Modal';
+import { WithRoutesInModal } from 'r-modal/lib/react-router';
 import MyPage from './components/MyPage';
+import MyModal from './components/MyModal';
 
 const App = ({ children }) => (
   <div>{children}</div>
@@ -29,6 +30,7 @@ const DefaultWithRoutesInModal = props => (
     {...props}
     component={App}
     page={MyPage}
+    modal={MyModal}
   />
 );
 
@@ -37,6 +39,7 @@ const BoardWithRoutesInModal = props => (
     {...props}
     component={Board}
     page={MyPage}
+    modal={MyModal}
     returnTo={`/boards/${props.params.id[0]}`}
   />
 );

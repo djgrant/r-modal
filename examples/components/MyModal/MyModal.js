@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
-import { Modal } from 'Modal';
-import { lockPage, unlockPage } from 'Page';
+import { Modal } from 'r-modal';
+import { lockPage, unlockPage } from 'r-modal/lib/redux';
 
 export default connect(
   () => ({
