@@ -30,7 +30,6 @@ export const Page = React.createClass({
     return (
       <div
         {...ownProps}
-        className="page"
         style={locked ? this.getLockedStyles() : {}}
       />
     );
