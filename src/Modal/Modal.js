@@ -9,26 +9,36 @@ export const Modal = React.createClass({
     children: PropTypes.node,
     open: PropTypes.bool,
     onRequestClose: PropTypes.func.isRequired,
-    onBeforeOpen: PropTypes.func.isRequired,
-    onBeforeClose: PropTypes.func.isRequired
+    onBeforeOpen: PropTypes.func,
+    onBeforeClose: PropTypes.func
   },
   componentDidMount() {
     window.addEventListener('keydown', this.handleKeyDown);
     if (this.props.open) {
-      this.props.onBeforeOpen();
+      this.onBeforeOpen();
     }
   },
   componentWillReceiveProps(newProps) {
     if (newProps.open && !this.props.open) {
-      this.props.onBeforeOpen();
+      this.onBeforeOpen();
     }
     else if (!newProps.open && this.props.open) {
-      this.props.onBeforeClose();
+      this.onBeforeClose();
     }
   },
   componentWillUnmount() {
     window.removeEventListener('keydown', this.handleKeyDown);
-    this.props.onBeforeClose();
+    this.onBeforeClose();
+  },
+  onBeforeOpen() {
+    if (typeof this.props.onBeforeOpen === 'function') {
+      this.props.onBeforeOpen();
+    }
+  },
+  onBeforeClose() {
+    if (typeof this.props.onBeforeClose === 'function') {
+      this.props.onBeforeClose();
+    }
   },
   getStyles() {
     return {
