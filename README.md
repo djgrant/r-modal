@@ -70,7 +70,7 @@ locked | bool.isRequired | locks the position of the web page, preventing scroll
 A react-router integration that renders child routes inside a modal.
 
 ```js
-import { WithRoutesInModal } from 'r-modal';
+import { WithRoutesInModal } from 'r-modal/lib/react-router';
 
 const AppWithRoutesInModal = props => (
   <WithRoutesInModal
@@ -88,7 +88,7 @@ const AppWithRoutesInModal = props => (
 ```
 
 ```js
-import { WithRoutesInModal } from 'r-modal';
+import { WithRoutesInModal } from 'r-modal/lib/react-router';
 
 const BoardWithRoutesInModal = props => (
   <WithRoutesInModal

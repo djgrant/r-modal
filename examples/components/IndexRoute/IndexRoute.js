@@ -8,12 +8,11 @@ import './styles.css';
 import ReactStateModal from '../ReactStateModal';
 import ReactStateModalCode from '!!raw!../ReactStateModal/ReactStateModal';
 
-import { openModal, closeModal } from 'Modal';
+import { openModal, closeModal } from 'r-modal/lib/redux';
 import ReduxStateModal from '../ReduxStateModal';
 import ReduxStateModalCode from '!!raw!../ReduxStateModal/ReduxStateModal';
 
 import RouterStateModal from '../RouterStateModal';
-// import RouterStateModalCode from '!!raw!../RouterStateModal/RouterStateModal';
 
 const App = React.createClass({
   propTypes: {

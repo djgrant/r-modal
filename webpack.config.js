@@ -11,7 +11,7 @@ const config = getConfig({
   }
 });
 
-config.resolve.modulesDirectories = ['src', 'node_modules'];
+config.resolve.modulesDirectories = ['node_modules'];
 
 if (NODE_ENV === 'production') {
   config.output.libraryTarget = 'umd';

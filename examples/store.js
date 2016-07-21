@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux';
 import configureStore from './lib/configureStore';
 import createGlobalSelectors from './lib/createGlobalSelectors';
-import { pageReducer, pageSelectors } from 'Page';
-import { modalsReducer, modalsSelectors } from 'Modal';
+import { pageReducer, pageSelectors } from 'r-modal/lib/redux';
+import { modalsReducer, modalsSelectors } from 'r-modal/lib/redux';
 
 export const reducer = combineReducers({
   page: pageReducer,
