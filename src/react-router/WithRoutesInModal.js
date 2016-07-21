@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
-import { withRouter } from 'react-router';
-import { Modal as DefaultModal } from './Modal';
+import withRouter from 'react-router/lib/withRouter';
+import { Modal as DefaultModal } from '../Modal';
 import { Page as DefaultPage } from '../Page';
 
 export const WithRoutesInModal = withRouter(React.createClass({
