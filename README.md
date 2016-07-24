@@ -45,6 +45,8 @@ className | string | classes to be applied to the modal element
 overlayClassName | string | classes to be applied to the overlay element
 style | shape({ overlay, modal }) | an object with inline styles to be applied to overlay and modal elements
 
+---
+
 ### `<Page>`
 
 A stateless unstyled component that locks the scroll position of the underlying page.
@@ -65,19 +67,37 @@ prop|type|description
 :---|:---|:---
 locked | bool.isRequired | locks the position of the web page, preventing scrolling beneath the modal
 
+---
+
 ### `<WithRoutesInModal>`
 
 A react-router integration that renders child routes inside a modal.
 
 ```js
+import { Page, Modal } from 'r-modal';
 import { WithRoutesInModal } from 'r-modal/lib/react-router';
+
+const App = props => (
+  <div>
+    <Page>
+      {props.children}
+    </Page>
+    {props.showModal && (
+      <Modal
+        open
+        onRequestClose={props.onModalClose}>
+        {props.modalContents}
+      </Modal>
+    )}
+  </div>
+);
 
 const AppWithRoutesInModal = props => (
   <WithRoutesInModal
     {...props}
     component={App}
   />
-)
+);
 
 <Router>
   <Route path="/" component={AppWithRoutesInModal}>
@@ -93,8 +113,8 @@ import { WithRoutesInModal } from 'r-modal/lib/react-router';
 const BoardWithRoutesInModal = props => (
   <WithRoutesInModal
     {...props}
-    component={Board}
-    returnTo={`/boards/${props.params.id[0]}`}
+    component={App}
+    backgroundLocation={`/boards/${props.params.id[0]}`}
   />
 )
 
