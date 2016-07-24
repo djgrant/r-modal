@@ -130,11 +130,11 @@ const BoardWithRoutesInModal = props => (
 prop|type|description
 :---|:---|:---
 component | func | the route component to decorate
-returnTo | oneOfType([object, string]) | the location to navigate back to when the modal is closed.*
+parentLocation* | oneOfType([object, string]) | the location of the modal's parent that is rendered behind the modal
 modal | func | an instance of the stateless Modal component
 page | func | an instance of the stateless Page component
 
-* When provided routes are always rendered in a modal. Otherwise, when not provided, routes will only be rendered in a modal if they have router state of `{ modal: true }`.
+*When provided, child routes are always rendered in a modal. Closing the modal will resolve to this location, therefore the provided location should be the exact route that is rendered beneath the modal. When not provided, routes will only be rendered in a modal if they have router state of `{ modal: true }`.
 
 ### redux integration
 
