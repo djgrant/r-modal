@@ -44,6 +44,7 @@ onBeforeClose | func | called before the modal closes
 className | string | classes to be applied to the modal element
 overlayClassName | string | classes to be applied to the overlay element
 style | shape({ overlay, modal }) | an object with inline styles to be applied to overlay and modal elements
+flatNodes | bool | renders modal and overlay nodes as siblings (by default the modal node is nested inside the overlay)
 
 ---
 

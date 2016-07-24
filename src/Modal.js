@@ -14,6 +14,7 @@ export const Modal = React.createClass({
       overlay: PropTypes.Object
     }),
     open: PropTypes.bool,
+    flatNodes: PropTypes.bool,
     onRequestClose: PropTypes.func.isRequired,
     onBeforeOpen: PropTypes.func,
     onBeforeClose: PropTypes.func
@@ -67,21 +68,41 @@ export const Modal = React.createClass({
     }
   },
   render() {
+    const overlay = (props = {}) => (
+      <div
+        ref={this.getOverlayRef}
+        className={this.props.overlayClassName}
+        style={this.props.style.overlay}
+        onClick={this.handleOverlayClick}
+        {...props}
+      />
+    );
+    const modal = (
+      <div
+        className={this.props.className}
+        style={this.props.style.modal}>
+        {this.props.children}
+      </div>
+    );
+
+    if (!this.props.open) {
+      return null;
+    }
+
+    if (this.props.flatNodes) {
+      return (
+        <div>
+          {overlay()}
+          {modal}
+        </div>
+      );
+    }
+
     return (
       <div>
-        {this.props.open && (
-          <div
-            ref={this.getOverlayRef}
-            className={this.props.overlayClassName}
-            style={this.props.style.overlay}
-            onClick={this.handleOverlayClick}>
-            <div
-              className={this.props.className}
-              style={this.props.style.modal}>
-              {this.props.children}
-            </div>
-          </div>
-        )}
+        {overlay({
+          children: modal
+        })}
       </div>
     );
   }
