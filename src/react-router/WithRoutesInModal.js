@@ -8,7 +8,7 @@ export const WithRoutesInModal = withRouter(React.createClass({
     children: PropTypes.node,
     router: PropTypes.object,
     routes: PropTypes.array,
-    returnTo: PropTypes.oneOfType([
+    parentLocation: PropTypes.oneOfType([
       PropTypes.string,
       PropTypes.object
     ])
@@ -33,11 +33,11 @@ export const WithRoutesInModal = withRouter(React.createClass({
     }
   },
   closeModal() {
-    const returnTo = this.props.returnTo || this.previousLocation.pathname;
-    this.props.router.push(returnTo);
+    const previousLocation = this.props.parentLocation || this.previousLocation.pathname;
+    this.props.router.push(previousLocation);
   },
   render() {
-    if (this.props.returnTo) {
+    if (this.props.parentLocation) {
       const showModal = this.props.routes.length > 1;
       return (
         <this.props.component
