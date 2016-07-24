@@ -2,35 +2,30 @@ import React, { PropTypes } from 'react';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
 import { Router, Route, IndexRoute, browserHistory } from 'react-router';
-import store from './store';
-import Index from './components/IndexRoute';
 import { WithRoutesInModal } from 'r-modal/lib/react-router';
-import MyPage from './components/MyPage';
-import MyModal from './components/MyModal';
-
-const App = ({ children }) => (
-  <div>{children}</div>
-);
+import store from './store';
+import App from './App';
+import Index from './components/IndexRoute';
 
 const ModalContent = props => (<div>This is a modal with id: {props.params.id}</div>);
 
 let i = 100;
-const elements = [];
+const boardContent = [];
 while (i > 0) {
-  elements.push(<div key={i}>dummy content</div>);
+  boardContent.push(<div key={i}>dummy content</div>);
   i--;
 }
 
 const Board = props => (
-  <div>{elements}</div>
+  <App {...props}>
+    {boardContent}
+  </App>
 );
 
 const DefaultWithRoutesInModal = props => (
   <WithRoutesInModal
     {...props}
     component={App}
-    page={MyPage}
-    modal={MyModal}
   />
 );
 
@@ -38,9 +33,7 @@ const BoardWithRoutesInModal = props => (
   <WithRoutesInModal
     {...props}
     component={Board}
-    page={MyPage}
-    modal={MyModal}
-    returnTo={`/boards/${props.params.id[0]}`}
+    parentLocation={`/boards/${props.params.id[0]}`}
   />
 );
 
